@@ -1,0 +1,128 @@
+/* Variables */
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #3C4142;
+    --detail-color: #C9A227;
+    --detail-color-sec: #9d7f1e;
+}
+
+/* Base */
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background-color: var(--detail-color);
+    color: white;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-color);
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(33, 37, 41, 0.9) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--detail-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link:hover {
+    color: var(--detail-color) !important;
+    transition: color 0.3s ease;
+}
+
+/* Hero */
+.hero-section {
+    min-height: 100vh;
+    background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
+}
+
+.text-golden {
+    background: linear-gradient(135deg, #C9A227 0%, #f3cf65 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--detail-color);
+    display: inline-block;
+}
+
+#btn-swap-hero {
+    background-color: var(--detail-color);
+    color: black;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+    transition: all 0.3s ease;
+}
+
+#btn-swap-hero:hover {
+    background-color: #e6c14a;
+    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
+    transform: scale(1.05);
+}
+
+.hero-img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    filter: drop-shadow(0 10px 20px rgba(201, 162, 39, 0.3));
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Cards */
+.card {
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    background: #ffffff;
+}
+
+.card-custom {
+    border: 2px solid var(--detail-color-sec) !important;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(201, 162, 39, 0.15) !important;
+    border-color: var(--detail-color) !important;
+}
+
+.card:hover .bi {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.card .text-golden {
+    -webkit-text-fill-color: initial !important;
+    background: none !important;
+    color: var(--detail-color) !important;
+}
+
+/* Footer and Extras */
+.hover-gold:hover {
+    color: var(--detail-color) !important;
+    transition: color 0.2s ease;
+}
+
+hr.border-secondary {
+    opacity: 0.2;
+}
