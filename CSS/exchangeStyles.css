@@ -6,17 +6,18 @@
     --detail-color-sec: #9d7f1e;
     --detail-color-light: #eacf96;
     --detail-color-lighter: #f4e7ca;
-;
 }
 
-body{
+/* Base Styles */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
     background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
-
-}
-
-/* Base */
-html {
-    scroll-behavior: smooth;
 }
 
 /* Navbar */
@@ -32,32 +33,112 @@ html {
     transition: color 0.3s ease;
 }
 
-/* form */
+/* Layout & Sections */
 .organizer-section {
-    min-height: 65vh;
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
-form{
+/* Form Styles */
+form {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-/* Gradient animation */
+.form-check {
+    font-size: 0.95rem;
+}
 
+#organizerName {
+    text-align: center;
+}
+
+/* Inputs & Form Elements */
+input {
+    border: 2px solid var(--detail-color) !important;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--detail-color-sec) !important;
+    box-shadow: 0px 0px 10px var(--detail-color) !important;
+}
+
+#partoftheexchange:checked {
+    background-color: var(--detail-color) !important;
+    border-color: var(--detail-color-sec) !important;
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4) !important;
+}
+
+#partoftheexchange:focus {
+    border-color: var(--detail-color-sec) !important;
+    box-shadow: 0 0 0.25rem rgba(201, 162, 39, 0.25) !important;
+}
+
+/* Buttons */
+#cont {
+    background-color: var(--detail-color);
+    color: black;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+    transition: all 0.3s ease;
+}
+
+#cont:hover {
+    background-color: #e6c14a;
+    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
+    transform: scale(1.05);
+}
+
+/* Decorations & Footer */
+hr {
+    color: var(--detail-color);
+}
+
+hr.border-secondary {
+    opacity: 0.2;
+}
+
+.hover-gold:hover {
+    color: var(--detail-color) !important;
+    transition: color 0.2s ease;
+}
+
+footer hr {
+    margin: 0.8rem 0;
+}
+
+/* Gradient Animations */
 @property --angle {
     syntax: "<angle>";
     initial-value: 0deg;
     inherits: false;
 }
 
-form::after, form::before {
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
+}
+
+form::after,
+form::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(from var(--angle), var(--detail-color), var(--detail-color-sec), var(--detail-color-light), var(--detail-color-lighter),var(--detail-color));
+    background-image: conic-gradient(from var(--angle), var(--detail-color), var(--detail-color-sec), var(--detail-color-light), var(--detail-color-lighter), var(--detail-color));
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -71,66 +152,30 @@ form::before {
     opacity: 0.5;
 }
 
-@keyframes spin {
-    from {
-        --angle: 0deg;
-    }
-    to{
-        --angle: 360deg;
+/* Media Queries */
+@media (max-width: 768px) {
+    form {
+        padding: 2rem 1.5rem !important;
     }
 }
 
-/* Gradient animation */
+@media (max-width: 576px) {
+    #cont {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px;
+    }
 
-#organizerName{
-    text-align: center;
-}
+    .swal2-popup {
+        width: 85% !important;
+        font-size: 0.9rem !important;
+    }
 
-#partoftheexchange:checked{
-    background-color: var(--detail-color) !important;
-    border-color: var(--detail-color-sec) !important;
-    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4) !important;
-}
+    .swal2-title {
+        font-size: 1.2rem !important;
+    }
 
-#partoftheexchange:focus{
-    border-color: var(--detail-color-sec) !important;
-    box-shadow:  0 0 0.25rem rgba(201, 162, 39, 0.25) !important;
-}
-
-#cont{
-    background-color: var(--detail-color);
-    color: black;
-    font-weight: 700;
-    font-size: 1.2rem;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
-    transition: all 0.3s ease;
-}
-
-#cont:hover{
-    background-color: #e6c14a;
-    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
-    transform: scale(1.05);
-}
-
-input:focus{
-    outline: none;
-    border-color: var(--detail-color-sec) !important;
-    box-shadow: 0px 0px 10px var(--detail-color) !important;
-}
-
-hr{
-    color: var(--detail-color);
-}
-
-/* Footer and Extras */
-.hover-gold:hover {
-    color: var(--detail-color) !important;
-    transition: color 0.2s ease;
-}
-
-hr.border-secondary {
-    opacity: 0.2;
+    .swal2-html-container {
+        font-size: 0.9rem !important;
+    }
 }

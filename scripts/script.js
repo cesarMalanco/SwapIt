@@ -1,3 +1,6 @@
-window.onload = function(){
+// ==============================
+// PAGE LOAD
+// ==============================
+window.onload = function () {
     localStorage.clear();
 };

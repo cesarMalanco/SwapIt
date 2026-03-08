@@ -7,7 +7,7 @@
     --detail-color-light: #eacf96;
     --detail-color-lighter: #f4e7ca;
 
-    /* christmas colors */
+    /* Christmas colors */
     --dark-red: #AD1010;
 
     /* Hanukkah colors */
@@ -23,7 +23,7 @@
     --light-purple: #AC87CD;
     --dark-purple: #724784;
 
-    /*New years colors*/
+    /* New Years colors */
     --dark-silver: #7B737D;
     --light-silver: #BAC1C5;
     --light-grey: #E3E5D8;
@@ -37,17 +37,21 @@
     /* Disabled button */
     --metalic-grey: #A5ABAC;
     --dim-gray: #656A69;
-
 }
 
+/* Global & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
-
-body{
+body {
     background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
-
+    margin: 0;
+    font-family: sans-serif;
 }
 
-/* Base */
 html {
     scroll-behavior: smooth;
 }
@@ -65,37 +69,59 @@ html {
     transition: color 0.3s ease;
 }
 
-/* form */
-.date-section{
-    min-height: 65vh;
+/* Card Container */
+#options {
+    min-height: auto;
+    padding: 1rem 15px;
 }
 
-#content{
+#content {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem 1.5rem;
 }
 
-/* Normal animation */
+/* Media queries */
+@media (max-width: 575.98px) {
+    #content {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
 
+@media (min-width: 576px) and (max-width: 767.98px) {
+    #content {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    #content {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+/* Animations */
 @property --angle {
     syntax: "<angle>";
     initial-value: 0deg;
     inherits: false;
 }
 
-#content::after, #content::before {
+#content::after,
+#content::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--detail-color),
-            var(--detail-color-sec),
-            var(--detail-color-light),
-            var(--detail-color-lighter),
-            var(--detail-color));
+    background-image: conic-gradient(from var(--angle), var(--detail-color), var(--detail-color-sec), var(--detail-color-light), var(--detail-color-lighter), var(--detail-color));
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -109,37 +135,39 @@ html {
     opacity: 0.5;
 }
 
-
 @keyframes spin {
     from {
         --angle: 0deg;
     }
-    to{
+
+    to {
         --angle: 360deg;
     }
 }
 
-/* Normal Gradient animation */
+@keyframes barberpole {
+    100% {
+        background-position: 100% 100%;
+    }
+}
 
-/* Christmas Gradient Animation */
+/* Theme Cards */
 
-#christmas-{
+/* Christmas */
+#christmas- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#christmas-::after, #christmas-::before {
+#christmas-::after,
+#christmas-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background: linear-gradient(
-            45deg, var(--dark-red) 25%, var(--primary-color)
-            25%, var(--primary-color) 50%, var(--dark-red)
-            50%, var(--dark-red) 75%, var(--primary-color)
-            75%);
+    background: linear-gradient(45deg, var(--dark-red) 25%, var(--primary-color) 25%, var(--primary-color) 50%, var(--dark-red) 50%, var(--dark-red) 75%, var(--primary-color) 75%);
     background-size: 40px 40px;
     top: 50%;
     left: 50%;
@@ -149,44 +177,33 @@ html {
     animation: barberpole 10s linear infinite;
 }
 
-@keyframes barberpole {
-    100% {
-        background-position: 100% 100%;
-    }
-}
 #christmas-::before {
     filter: blur(1.5rem);
     opacity: 0.5;
 }
 
-
-.christmas.custom-toggle{
+.christmas.custom-toggle {
     color: var(--primary-color) !important;
     background-color: var(--dark-red) !important;
     border-color: var(--dark-red) !important;
     box-shadow: none !important;
 }
-/* Christmas Gradient animation */
 
-/* Hanukkah Gradient Animation */
-#Hanukkah-{
+/* Hanukkah */
+#Hanukkah- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#Hanukkah-::after, #Hanukkah-::before {
+#Hanukkah-::after,
+#Hanukkah-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-blue),
-            var(--middle-blue),
-            var(--light-blue),
-            var(--white),
-            var(--dark-blue));
+    background-image: conic-gradient(from var(--angle), var(--dark-blue), var(--middle-blue), var(--light-blue), var(--white), var(--dark-blue));
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -200,35 +217,28 @@ html {
     opacity: 0.5;
 }
 
-
-.Hanukkah.custom-toggle{
+.Hanukkah.custom-toggle {
     color: var(--light-blue) !important;
     background-color: var(--dark-blue) !important;
     border-color: var(--dark-blue) !important;
     box-shadow: none !important;
 }
-/* Hanukkah Gradient animation */
 
-/* Halloween Gradient Animation */
-#Halloween-{
+/* Halloween */
+#Halloween- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#Halloween-::after, #Halloween-::before {
+#Halloween-::after,
+#Halloween-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-orange),
-            var(--light-orange),
-            var(--light-beige),
-            var(--light-purple),
-            var(--dark-purple),
-            var(--dark-orange));
+    background-image: conic-gradient(from var(--angle), var(--dark-orange), var(--light-orange), var(--light-beige), var(--light-purple), var(--dark-purple), var(--dark-orange));
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -242,33 +252,28 @@ html {
     opacity: 0.5;
 }
 
-
-.Halloween.custom-toggle{
+.Halloween.custom-toggle {
     color: var(--light-beige) !important;
     background-color: var(--dark-orange) !important;
     border-color: var(--dark-orange) !important;
     box-shadow: none !important;
 }
-/* Halloween Gradient animation */
 
-/* NewYears Gradient Animation */
-#NewYears-{
+/* NewYears */
+#NewYears- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#NewYears-::after, #NewYears-::before {
+#NewYears-::after,
+#NewYears-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-silver),
-            var(--light-silver),
-            var(--light-grey),
-            var(--dark-silver));
+    background-image: conic-gradient(from var(--angle), var(--dark-silver), var(--light-silver), var(--light-grey), var(--dark-silver));
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -282,34 +287,28 @@ html {
     opacity: 0.5;
 }
 
-
-.NewYears.custom-toggle{
+.NewYears.custom-toggle {
     color: var(--dark-silver) !important;
     background-color: var(--light-silver) !important;
     border-color: var(--dark-silver) !important;
     box-shadow: none !important;
 }
-/* NewYears Gradient animation */
 
-/* StValentine Gradient Animation */
-#StValentine-{
+/* St Valentine */
+#StValentine- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#StValentine-::after, #StValentine-::before {
+#StValentine-::after,
+#StValentine-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--val-dark-red),
-            var(--val-middle-red),
-            var(--val-dark-pink),
-            var(--val-light-pink),
-            var(--val-dark-red));
+    background-image: conic-gradient(from var(--angle), var(--val-dark-red), var(--val-middle-red), var(--val-dark-pink), var(--val-light-pink), var(--val-dark-red));
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -323,39 +322,28 @@ html {
     opacity: 0.5;
 }
 
-
-.StValentine.custom-toggle{
+.StValentine.custom-toggle {
     color: var(--val-dark-red) !important;
     background-color: var(--val-dark-pink) !important;
     border-color: var(--val-dark-pink) !important;
     box-shadow: none !important;
 }
-/* other Gradient animation */
 
-#other-{
+/* Other */
+#other- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#other-::after, #other-::before {
+#other-::after,
+#other-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), rgba(255, 0, 0, 1) 0%,
-            rgba(255, 154, 0, 1) 10%,
-            rgba(208, 222, 33, 1) 20%,
-            rgba(79, 220, 74, 1) 30%,
-            rgba(63, 218, 216, 1) 40%,
-            rgba(47, 201, 226, 1) 50%,
-            rgba(28, 127, 238, 1) 60%,
-            rgba(95, 21, 242, 1) 70%,
-            rgba(186, 12, 248, 1) 80%,
-            rgba(251, 7, 217, 1) 90%,
-            rgba(255, 0, 0, 1) 100%);
+    background-image: conic-gradient(from var(--angle), rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%);
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -369,54 +357,50 @@ html {
     opacity: 0.5;
 }
 
-
-.other.custom-toggle{
+.other.custom-toggle {
     color: var(--white) !important;
     background-color: rgba(28, 127, 238, 1);
     border-color: rgba(28, 127, 238, 1) !important;
     box-shadow: none !important;
 }
-/* other Gradient animation */
 
-/* active button click */
+/* Hover States & Disabled */
 .christmas.custom-toggle:hover,
 .Hanukkah.custom-toggle:hover,
-.Hallonomy.custom-toggle:hover,
+.Halloween.custom-toggle:hover,
 .NewYears.custom-toggle:hover,
 .StValentine.custom-toggle:hover,
-.other.custom-toggle:hover{
+.other.custom-toggle:hover {
     color: var(--dim-gray) !important;
     background-color: var(--metalic-grey) !important;
     border-color: var(--metalic-grey) !important;
     box-shadow: none !important;
 }
 
-
-/* active button click */
-
-/* disabled button */
-.disabled.custom-toggle{
+.disabled.custom-toggle {
     color: var(--metalic-grey) !important;
     background-color: var(--dim-gray) !important;
     border-color: var(--dim-gray) !important;
     box-shadow: none !important;
 }
-/* disabled button */
 
-#eventName{
+/* Inputs */
+#eventName {
     border-radius: 5px;
     background-color: var(--detail-color-lighter) !important;
     color: var(--secondary-color) !important;
     outline: none;
 }
 
-input:focus{
+input:focus {
     outline: none;
     border-color: var(--detail-color-sec) !important;
     box-shadow: 0px 0px 10px var(--detail-color) !important;
 }
 
-#cont{
+/* Buttons */
+#cont,
+#goBack {
     background-color: var(--detail-color);
     color: black;
     font-weight: 700;
@@ -428,41 +412,83 @@ input:focus{
     transition: all 0.3s ease;
 }
 
-#cont:hover{
+#cont:hover,
+#goBack:hover {
     background-color: #e6c14a;
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
     transform: scale(1.05);
 }
 
-#goBack{
+/* Elegant gold buttons */
+.btn-elegant-gold {
     background-color: var(--detail-color);
-    color: black;
+    color: black !important;
     font-weight: 700;
-    font-size: 1.2rem;
-    padding: 5px 10px;
+    font-size: 1.1rem;
+    padding: 8px 20px;
     border-radius: 8px;
     border: none;
     box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
     transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
 }
 
-#goBack:hover{
+.btn-elegant-gold:hover {
     background-color: #e6c14a;
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
     transform: scale(1.05);
+    color: black !important;
 }
 
-hr{
+.btn-elegant-gold i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* HR & Footer */
+hr {
     color: var(--detail-color);
 }
 
+hr.border-secondary {
+    opacity: 0.2;
+}
 
-/* Footer and Extras */
 .hover-gold:hover {
     color: var(--detail-color) !important;
     transition: color 0.2s ease;
 }
 
-hr.border-secondary {
-    opacity: 0.2;
+.progress-bar-gold {
+    background-color: var(--detail-color) !important;
+}
+
+/* SweetAlert Responsive */
+@media (max-width: 576px) {
+    .swal2-popup {
+        width: 90% !important;
+        padding: 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .swal2-title {
+        font-size: 1.2rem !important;
+    }
+
+    .swal2-content {
+        font-size: 0.9rem !important;
+    }
+
+    .swal2-actions .swal2-confirm,
+    .swal2-actions .swal2-cancel {
+        font-size: 0.85rem !important;
+        padding: 0.4rem 0.8rem !important;
+    }
+
+    #content {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
 }

@@ -36,11 +36,39 @@
 
 }
 
+html,
+body {
+    height: 100%;
+}
 
-
-body{
+body {
+    display: flex;
+    flex-direction: column;
     background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
+}
 
+
+main,
+#price-container {
+    flex: 1;
+}
+
+#price-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+footer {
+    flex-shrink: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(33, 37, 41, 0.9);
+    border-top: 1px solid var(--detail-color);
+    margin-top: auto;
 }
 
 /* Base */
@@ -62,11 +90,7 @@ html {
 }
 
 /* form */
-.date-section{
-    min-height: 65vh;
-}
-
-#content{
+#content {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
@@ -81,13 +105,13 @@ html {
     inherits: false;
 }
 
-#content::after, #content::before {
+#content::after,
+#content::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--detail-color),
+    background-image: conic-gradient(from var(--angle), var(--detail-color),
             var(--detail-color-sec),
             var(--detail-color-light),
             var(--detail-color-lighter),
@@ -110,7 +134,8 @@ html {
     from {
         --angle: 0deg;
     }
-    to{
+
+    to {
         --angle: 360deg;
     }
 }
@@ -119,23 +144,20 @@ html {
 
 /* Christmas Gradient Animation */
 
-#christmas-{
+#christmas- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#christmas-::after, #christmas-::before {
+#christmas-::after,
+#christmas-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background: linear-gradient(
-            45deg, var(--dark-red) 25%, var(--primary-color)
-            25%, var(--primary-color) 50%, var(--dark-red)
-            50%, var(--dark-red) 75%, var(--primary-color)
-            75%);
+    background: linear-gradient(45deg, var(--dark-red) 25%, var(--primary-color) 25%, var(--primary-color) 50%, var(--dark-red) 50%, var(--dark-red) 75%, var(--primary-color) 75%);
     background-size: 40px 40px;
     top: 50%;
     left: 50%;
@@ -150,6 +172,7 @@ html {
         background-position: 100% 100%;
     }
 }
+
 #christmas-::before {
     filter: blur(1.5rem);
     opacity: 0.5;
@@ -162,23 +185,24 @@ html {
     border-color: var(--dark-red) !important;
     box-shadow: none !important;
 }
+
 /* Christmas Gradient animation */
 
 /* Hanukkah Gradient Animation */
-#Hanukkah-{
+#Hanukkah- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#Hanukkah-::after, #Hanukkah-::before {
+#Hanukkah-::after,
+#Hanukkah-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-blue),
+    background-image: conic-gradient(from var(--angle), var(--dark-blue),
             var(--middle-blue),
             var(--light-blue),
             var(--white),
@@ -203,23 +227,24 @@ html {
     border-color: var(--dark-blue) !important;
     box-shadow: none !important;
 }
+
 /* Hanukkah Gradient animation */
 
 /* Halloween Gradient Animation */
-#Halloween-{
+#Halloween- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#Halloween-::after, #Halloween-::before {
+#Halloween-::after,
+#Halloween-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-orange),
+    background-image: conic-gradient(from var(--angle), var(--dark-orange),
             var(--light-orange),
             var(--light-beige),
             var(--light-purple),
@@ -245,23 +270,24 @@ html {
     border-color: var(--dark-orange) !important;
     box-shadow: none !important;
 }
+
 /* Halloween Gradient animation */
 
 /* NewYears Gradient Animation */
-#NewYears-{
+#NewYears- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#NewYears-::after, #NewYears-::before {
+#NewYears-::after,
+#NewYears-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-silver),
+    background-image: conic-gradient(from var(--angle), var(--dark-silver),
             var(--light-silver),
             var(--light-grey),
             var(--dark-silver));
@@ -285,23 +311,24 @@ html {
     border-color: var(--dark-silver) !important;
     box-shadow: none !important;
 }
+
 /* NewYears Gradient animation */
 
 /* StValentine Gradient Animation */
-#StValentine-{
+#StValentine- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#StValentine-::after, #StValentine-::before {
+#StValentine-::after,
+#StValentine-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--val-dark-red),
+    background-image: conic-gradient(from var(--angle), var(--val-dark-red),
             var(--val-middle-red),
             var(--val-dark-pink),
             var(--val-light-pink),
@@ -326,22 +353,23 @@ html {
     border-color: var(--val-dark-pink) !important;
     box-shadow: none !important;
 }
+
 /* other Gradient animation */
 
-#other-{
+#other- {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
 }
 
-#other-::after, #other-::before {
+#other-::after,
+#other-::before {
     content: "";
     position: absolute;
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), rgba(255, 0, 0, 1) 0%,
+    background-image: conic-gradient(from var(--angle), rgba(255, 0, 0, 1) 0%,
             rgba(255, 154, 0, 1) 10%,
             rgba(208, 222, 33, 1) 20%,
             rgba(79, 220, 74, 1) 30%,
@@ -372,16 +400,21 @@ html {
     border-color: rgba(28, 127, 238, 1) !important;
     box-shadow: none !important;
 }
+
 /* other Gradient animation */
 
-#eventName{
+#eventName {
     border-radius: 5px;
     background-color: var(--detail-color-lighter) !important;
     color: var(--secondary-color) !important;
     outline: none;
 }
 
-input:focus{
+input {
+    border: 2px solid var(--detail-color) !important;
+}
+
+input:focus {
     outline: none;
     border-color: var(--detail-color-sec) !important;
     box-shadow: 0px 0px 10px var(--detail-color) !important;
@@ -400,7 +433,7 @@ input:focus{
     box-shadow: none !important;
 }
 
-#cont{
+#cont {
     background-color: var(--detail-color);
     color: black;
     font-weight: 700;
@@ -412,13 +445,13 @@ input:focus{
     transition: all 0.3s ease;
 }
 
-#cont:hover{
+#cont:hover {
     background-color: #e6c14a;
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
     transform: scale(1.05);
 }
 
-#goBack{
+#goBack {
     background-color: var(--detail-color);
     color: black;
     font-weight: 700;
@@ -430,65 +463,71 @@ input:focus{
     transition: all 0.3s ease;
 }
 
-#goBack:hover{
+#goBack:hover {
     background-color: #e6c14a;
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
     transform: scale(1.05);
 }
 
-hr{
+hr {
     color: var(--detail-color);
 }
 
 
 /*set price BUTTON*/
 
-#price{
+#price {
     color: var(--detail-color-light);
     border-color: var(--detail-color-light);
     box-shadow: none !important;
 }
 
-#price.christmas:hover{
+#price.christmas:hover {
     color: var(--primary-color) !important;
     background-color: var(--dark-red) !important;
     border-color: var(--dark-red) !important;
     box-shadow: none !important;
 }
 
-#price.Hanukkah:hover{
+#price.Hanukkah:hover {
     color: var(--light-blue) !important;
     background-color: var(--dark-blue) !important;
     border-color: var(--dark-blue) !important;
     box-shadow: none !important;
 }
 
-#price.Halloween:hover{
+#price.Halloween:hover {
     color: var(--light-beige) !important;
     background-color: var(--dark-orange) !important;
     border-color: var(--dark-orange) !important;
     box-shadow: none !important;
 }
 
-#price.NewYears:hover{
+#price.NewYears:hover {
     color: var(--dark-silver) !important;
     background-color: var(--light-silver) !important;
     border-color: var(--dark-silver) !important;
     box-shadow: none !important;
 }
 
-#price.StValentine:hover{
+#price.StValentine:hover {
     color: var(--val-dark-red) !important;
     background-color: var(--val-dark-pink) !important;
     border-color: var(--val-dark-pink) !important;
     box-shadow: none !important;
 }
 
-#price.other:hover{
+#price.other:hover {
     color: var(--white) !important;
     background-color: rgba(28, 127, 238, 1);
     border-color: rgba(28, 127, 238, 1) !important;
     box-shadow: none !important;
+}
+
+#priceSymbol {
+    background-color: var(--secondary-color);
+    color: var(--detail-color);
+    border: 1px solid var(--detail-color);
 }
 
 /*set price BUTTON*/
@@ -502,3 +541,37 @@ hr{
 hr.border-secondary {
     opacity: 0.2;
 }
+
+@media (max-width: 576px) {
+
+    form {
+        padding: 2rem 1.5rem !important;
+    }
+
+    #participantsNames input {
+        font-size: 0.95rem;
+    }
+
+    .participants::placeholder {
+        font-size: 0.8rem;
+    }
+
+    .swal2-popup {
+        width: 18rem !important;
+        font-size: 0.9rem;
+    }
+
+    .swal2-title {
+        font-size: 1.2rem;
+    }
+
+    .swal2-html-container {
+        font-size: 0.9rem;
+    }
+
+    .swal2-confirm {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+

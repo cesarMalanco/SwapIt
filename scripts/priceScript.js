@@ -1,73 +1,126 @@
+// ==============================
+// PAGE LOAD
+// ==============================
+window.onload = function () {
+	const eventClass = events.includes(nameEvent) ? nameEvent : 'other';
+
+	content.id = eventClass + '-';
+
+	buttons.forEach(button => {
+		button.classList.add(eventClass);
+	});
+
+};
+
+// ==============================
+// GLOBAL VARIABLES/ CONSTANTS
+// ==============================
 const nameEvent = localStorage.getItem('eventType');
-let price;
+const events = ['christmas', 'Halloween', 'NewYears', 'Hanukkah', 'StValentine'];
+const content = document.getElementById('content');
+const buttons = document.querySelectorAll('.custom-toggle');
+const otherPrices = document.getElementById('otherPrices');
+const priceInput = document.getElementById('priceCus');
+const diffButton = document.getElementById('diff');
+const continueBtn = document.getElementById('cont');
 
-window.onload = function() {
-    if (nameEvent === 'christmas' || nameEvent === 'Halloween' || nameEvent === 'NewYears' || nameEvent === 'Hanukkah' || nameEvent === 'StValentine') {
-        document.getElementById('content').id = nameEvent + '-';
+// ==============================
+// FUNTIONS
+// ==============================
+// Function: Price button functionalities
+function toggleOther() {
+	const eventClass = events.includes(nameEvent) ? nameEvent : 'other';
 
-        document.querySelectorAll('.custom-toggle').forEach(button => {
-            button.classList.add(nameEvent);
-        });
-    } else {
-        document.getElementById('content').id = 'other-';
+	if (diffButton.classList.contains('active')) {
 
-        document.querySelectorAll('.custom-toggle').forEach(button => {
-            button.classList.add('other');
-        });
-    }
+		otherPrices.style.display = 'block';
+
+		priceInput.classList.remove(...events, 'other');
+		priceInput.classList.add(eventClass);
+
+	} else {
+		otherPrices.style.display = 'none';
+		priceInput.value = "";
+	}
 }
 
-document.querySelectorAll('.custom-toggle').forEach(button => {
-    button.addEventListener('click', function() {
-        const isActive = this.classList.contains('active');
+// ==============================
+// EVENT LISTENERS
+// ==============================
+// Buttons: Prices
+buttons.forEach(button => {
+	button.addEventListener('click', function () {
 
-        document.querySelectorAll('.custom-toggle').forEach(btn => btn.classList.remove('active'));
+		const isActive = this.classList.contains('active');
 
-        if (!isActive) {
-            this.classList.add('active');
-            if (button.classList.contains('christmas') || button.classList.contains('Halloween') || button.classList.contains('NewYears') || button.classList.contains('Hanukkah') || button.classList.contains('StValentine')) {
-                document.getElementById('otherPrices').style.display = 'none';
-            }
-        }
-    });
+		buttons.forEach(btn => btn.classList.remove('active'));
+
+		if (!isActive) {
+			this.classList.add('active');
+		}
+
+		toggleOther();
+	});
 });
 
-function Other(){
-    if (document.getElementById("diff").classList.contains('active')) {
-        document.getElementById('otherPrices').style.display = 'block';
-        if (nameEvent === 'christmas' || nameEvent === 'Halloween' || nameEvent === 'NewYears' || nameEvent === 'Hanukkah' || nameEvent === 'StValentine') {
-            document.getElementById('price').classList.add(nameEvent);
+// Button: "Continuar"
+continueBtn.addEventListener("click", function () {
+	const active = document.querySelector('.custom-toggle.active');
 
-        } else {
-            document.getElementById('price').classList.add('other');
-        }
-    }else{
-        document.getElementById('otherPrices').style.display = 'none';
-    }
-}
+	if (!active) {
+		Swal.fire({
+			icon: 'warning',
+			text: 'Por favor seleccione una presupuesto',
+			confirmButtonColor: '#C9A227',
+			scrollbarPadding: false,
+			width: 420,
+			heightAuto: false,
+		});
+		return;
+	}
 
-document.getElementById("diff").addEventListener("click", Other);
+	if (active.id === 'diff') {
+		const priceValue = priceInput.value.trim();
 
-function getPrice() {
-    let auxprice = document.getElementById('priceCus').value;
+		if (priceValue === "") {
+			Swal.fire({
+				icon: 'warning',
+				title: 'Presupuesto faltante',
+				text: 'Por favor ingrese un precio válido',
+				confirmButtonColor: '#C9A227',
+				scrollbarPadding: false,
+				width: 420,
+				heightAuto: false,
+			});
+			return;
+		}
+		localStorage.setItem('eventPrice', '$' + priceValue);
 
-    if (auxprice !== null) {
-        price = auxprice;
-    }
-}
+	} else {
+		localStorage.setItem('eventPrice', active.innerText);
+	}
 
-document.getElementById("cont").addEventListener("click", function() {
-    const active = document.querySelector('.custom-toggle.active');
-
-    if (!active) {
-        this.removeAttribute('href');
-        return;
-    }
-
-    if (active.id === 'diff') {
-        localStorage.setItem('eventPrice', '$' + price);
-    } else {
-        localStorage.setItem('eventPrice', active.innerText);
-        this.setAttribute('href', 'finished.html');
-    }
+	window.location.href = "finished.html";
 });
+
+// Image & Text: Logo & Page Name
+document.getElementById('logo-ref').addEventListener('click', (e) => {
+	e.preventDefault();
+	Swal.fire({
+		title: '¿Regresar al inicio?',
+		text: 'Se perderán todos los datos del sorteo.',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#C9A227',
+		confirmButtonText: 'Sí, salir',
+		cancelButtonText: 'Cancelar',
+		scrollbarPadding: false,
+		width: 420,
+		heightAuto: false,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			localStorage.clear();
+			window.location.href = 'main.html';
+		}
+	});
+})

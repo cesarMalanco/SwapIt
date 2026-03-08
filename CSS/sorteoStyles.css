@@ -1,451 +1,170 @@
 /* Variables */
 :root {
-    --primary-color: #ffffff;
-    --secondary-color: #3C4142;
-    --detail-color: #C9A227;
-    --detail-color-sec: #9d7f1e;
-    --detail-color-light: #eacf96;
-    --detail-color-lighter: #f4e7ca;
-
-    /* christmas colors */
-    --dark-red: #AD1010;
-
-    /* Hanukkah colors */
-    --dark-blue: #092C56;
-    --middle-blue: #225688;
-    --light-blue: #A9CBE0;
-    --white: #F0F5F4;
-
-    /* Halloween colors */
-    --dark-orange: #FF7F42;
-    --light-orange: #FFAF24;
-    --light-beige: #FFE2B8;
-    --light-purple: #AC87CD;
-    --dark-purple: #724784;
-
-    /*New years colors*/
-    --dark-silver: #7B737D;
-    --light-silver: #BAC1C5;
-    --light-grey: #E3E5D8;
-
-    /* St Valentine colors */
-    --val-dark-red: #720307;
-    --val-middle-red: #A00C21;
-    --val-dark-pink: #DE5F7F;
-    --val-light-pink: #F592A2;
-
+	--primary-color: #ffffff;
+	--secondary-color: #3C4142;
+	--detail-color: #C9A227;
+	--detail-color-sec: #9d7f1e;
+	--detail-color-lighter: #f4e7ca;
 }
 
-
-
-body{
-    background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
-
-}
-
-/* Base */
-html {
-    scroll-behavior: smooth;
+/* Base Styles */
+body {
+	background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
+	font-family: 'Inter', sans-serif;
+	color: var(--primary-color);
+	margin: 0;
+	min-height: 100vh;
+	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
 }
 
 /* Navbar */
 .navbar {
-    background-color: rgba(33, 37, 41, 0.9) !important;
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid var(--detail-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+	background-color: rgba(33, 37, 41, 0.9) !important;
+	backdrop-filter: blur(10px);
+	border-bottom: 2px solid var(--detail-color);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.nav-link:hover {
-    color: var(--detail-color) !important;
-    transition: color 0.3s ease;
+/* Reveal Zone (Drag & Drop) */
+#revealZone {
+	background: rgba(255, 255, 255, 0.02);
+	border: 2px dashed var(--detail-color-sec) !important;
+	border-radius: 15px;
+	transition: all 0.3s ease;
 }
 
-/* form */
-.sort-section{
-    min-height: 65vh;
+#revealZone.dragover {
+	background: rgba(201, 162, 39, 0.1);
+	border-style: solid !important;
+	transform: scale(1.02);
 }
 
-#content{
-    border-radius: 15px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    position: relative;
+/* Pair Cards*/
+.pair-card {
+	width: 140px;
+	height: 140px;
+	background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+	border: 1px solid var(--detail-color);
+	position: relative;
+	cursor: grab;
+	perspective: 1000px;
+	border-radius: 4px;
+	transition: transform 0.4s ease;
+	touch-action: none;
+	z-index: 5;
+	transform-style: preserve-3d;
 }
 
-/* Normal animation */
-
-@property --angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
+.pair-card::before,
+.pair-card::after {
+	content: "";
+	position: absolute;
+	background: linear-gradient(90deg, var(--detail-color-sec), var(--detail-color), var(--detail-color-sec));
+	z-index: 1;
 }
 
-#content::after, #content::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--detail-color),
-            var(--detail-color-sec),
-            var(--detail-color-light),
-            var(--detail-color-lighter),
-            var(--detail-color));
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: 3s spin linear infinite;
+.pair-card::before {
+	top: 0;
+	left: 50%;
+	width: 12px;
+	height: 100%;
+	transform: translateX(-50%);
 }
 
-#content::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
+.pair-card::after {
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 12px;
+	transform: translateY(-50%);
 }
 
-
-@keyframes spin {
-    from {
-        --angle: 0deg;
-    }
-    to{
-        --angle: 360deg;
-    }
+.pair-card .giver,
+.pair-card .receiver {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 0.7rem;
+	padding: 15px;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	z-index: 3;
 }
 
-/* Normal Gradient animation */
-
-/* Christmas Gradient Animation */
-
-#christmas-{
-    border-radius: 15px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    position: relative;
+.pair-card .receiver {
+	background: #fdfdfd;
+	background-image: radial-gradient(#d1d1d1 0.5px, transparent 0);
+	background-size: 8px 8px;
+	color: #333;
+	transform: rotateY(180deg);
 }
 
-#christmas-::after, #christmas-::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background: linear-gradient(
-            45deg, var(--dark-red) 25%, var(--primary-color)
-            25%, var(--primary-color) 50%, var(--dark-red)
-            50%, var(--dark-red) 75%, var(--primary-color)
-            75%);
-    background-size: 40px 40px;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: barberpole 10s linear infinite;
+.pair-card.flipped {
+	transform: rotateY(180deg);
 }
 
-@keyframes barberpole {
-    100% {
-        background-position: 100% 100%;
-    }
-}
-#christmas-::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
+.pair-card.dragging {
+	transform: rotateY(0deg) !important;
+	opacity: 0.8;
+	z-index: 1000;
 }
 
-
-.christmas.custom-toggle.active {
-    color: var(--primary-color) !important;
-    background-color: var(--dark-red) !important;
-    border-color: var(--dark-red) !important;
-    box-shadow: none !important;
-}
-/* Christmas Gradient animation */
-
-/* Hanukkah Gradient Animation */
-#Hanukkah-{
-    border-radius: 15px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    position: relative;
+/* Navigation Buttons */
+.home-button-container {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 1100;
 }
 
-#Hanukkah-::after, #Hanukkah-::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-blue),
-            var(--middle-blue),
-            var(--light-blue),
-            var(--white),
-            var(--dark-blue));
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: 3s spin linear infinite;
+.btn-home-elegant {
+	background-color: var(--detail-color);
+	color: black;
+	border: none;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	font-size: 1.2rem;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+	transition: all 0.3s ease;
 }
 
-#Hanukkah-::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
+.btn-home-elegant:hover {
+	background-color: #e6c14a;
+	transform: scale(1.1);
 }
 
+/* Media Queries */
+@media (max-width: 576px) {
+	.pair-card {
+		width: 120px;
+		height: 120px;
+	}
 
-.Hanukkah.custom-toggle.active {
-    color: var(--light-blue) !important;
-    background-color: var(--dark-blue) !important;
-    border-color: var(--dark-blue) !important;
-    box-shadow: none !important;
-}
-/* Hanukkah Gradient animation */
+	.swal2-popup {
+		width: 90% !important;
+		padding: 1rem !important;
+		font-size: 0.85rem !important;
+	}
 
-/* Halloween Gradient Animation */
-#Halloween-{
-    border-radius: 15px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    position: relative;
-}
+	.swal2-title {
+		font-size: 1.2rem !important;
+	}
 
-#Halloween-::after, #Halloween-::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-orange),
-            var(--light-orange),
-            var(--light-beige),
-            var(--light-purple),
-            var(--dark-purple),
-            var(--dark-orange));
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: 3s spin linear infinite;
-}
+	.swal2-content {
+		font-size: 0.9rem !important;
+	}
 
-#Halloween-::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
-}
-
-
-.Halloween.custom-toggle.active {
-    color: var(--light-beige) !important;
-    background-color: var(--dark-orange) !important;
-    border-color: var(--dark-orange) !important;
-    box-shadow: none !important;
-}
-/* Halloween Gradient animation */
-
-/* NewYears Gradient Animation */
-#NewYears-{
-    border-radius: 15px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    position: relative;
-}
-
-#NewYears-::after, #NewYears-::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--dark-silver),
-            var(--light-silver),
-            var(--light-grey),
-            var(--dark-silver));
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: 3s spin linear infinite;
-}
-
-#NewYears-::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
-}
-
-
-.NewYears.custom-toggle.active {
-    color: var(--dark-silver) !important;
-    background-color: var(--light-silver) !important;
-    border-color: var(--dark-silver) !important;
-    box-shadow: none !important;
-}
-/* NewYears Gradient animation */
-
-/* StValentine Gradient Animation */
-#StValentine-{
-    border-radius: 15px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    position: relative;
-}
-
-#StValentine-::after, #StValentine-::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), var(--val-dark-red),
-            var(--val-middle-red),
-            var(--val-dark-pink),
-            var(--val-light-pink),
-            var(--val-dark-red));
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: 3s spin linear infinite;
-}
-
-#StValentine-::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
-}
-
-
-.StValentine.custom-toggle.active {
-    color: var(--val-dark-red) !important;
-    background-color: var(--val-dark-pink) !important;
-    border-color: var(--val-dark-pink) !important;
-    box-shadow: none !important;
-}
-/* other Gradient animation */
-
-#other-{
-    border-radius: 15px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    position: relative;
-}
-
-#other-::after, #other-::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background-image: conic-gradient(
-            from var(--angle), rgba(255, 0, 0, 1) 0%,
-            rgba(255, 154, 0, 1) 10%,
-            rgba(208, 222, 33, 1) 20%,
-            rgba(79, 220, 74, 1) 30%,
-            rgba(63, 218, 216, 1) 40%,
-            rgba(47, 201, 226, 1) 50%,
-            rgba(28, 127, 238, 1) 60%,
-            rgba(95, 21, 242, 1) 70%,
-            rgba(186, 12, 248, 1) 80%,
-            rgba(251, 7, 217, 1) 90%,
-            rgba(255, 0, 0, 1) 100%);
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: 3s spin linear infinite;
-}
-
-#other-::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
-}
-
-
-.other.custom-toggle.active {
-    color: var(--white) !important;
-    background-color: rgba(28, 127, 238, 1);
-    border-color: rgba(28, 127, 238, 1) !important;
-    box-shadow: none !important;
-}
-/* other Gradient animation */
-
-#eventName{
-    border-radius: 5px;
-    background-color: var(--detail-color-lighter) !important;
-    color: var(--secondary-color) !important;
-    outline: none;
-}
-
-input:focus{
-    outline: none;
-    border-color: var(--detail-color-sec) !important;
-    box-shadow: 0px 0px 10px var(--detail-color) !important;
-}
-
-.custom-toggle {
-    color: var(--detail-color-light);
-    border-color: var(--detail-color-light);
-    box-shadow: none !important;
-}
-
-.custom-toggle:hover,
-.custom-toggle:focus {
-    color: var(--detail-color-light);
-    border-color: var(--detail-color-light);
-    box-shadow: none !important;
-}
-
-#cont{
-    background-color: var(--detail-color);
-    color: black;
-    font-weight: 700;
-    font-size: 1.2rem;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
-    transition: all 0.3s ease;
-}
-
-#cont:hover{
-    background-color: #e6c14a;
-    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
-    transform: scale(1.05);
-}
-
-#goBack{
-    background-color: var(--detail-color);
-    color: black;
-    font-weight: 700;
-    font-size: 1.2rem;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
-    transition: all 0.3s ease;
-}
-
-#goBack:hover{
-    background-color: #e6c14a;
-    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
-    transform: scale(1.05);
-}
-
-hr{
-    color: var(--detail-color);
-}
-
-/* Footer and Extras */
-.hover-gold:hover {
-    color: var(--detail-color) !important;
-    transition: color 0.2s ease;
-}
-
-hr.border-secondary {
-    opacity: 0.2;
+	.swal2-actions .swal2-confirm,
+	.swal2-actions .swal2-cancel {
+		font-size: 0.85rem !important;
+		padding: 0.4rem 0.8rem !important;
+	}
 }

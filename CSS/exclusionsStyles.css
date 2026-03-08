@@ -9,18 +9,15 @@
 
     --dark-red: #AD1010;
     --light-red: #de9f9f;
-
-;
 }
 
-body{
-    background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
-
-}
-
-/* Base */
+/* Base Styles */
 html {
     scroll-behavior: smooth;
+}
+
+body {
+    background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #111 40%, #000 100%);
 }
 
 /* Navbar */
@@ -36,80 +33,46 @@ html {
     transition: color 0.3s ease;
 }
 
-/* form */
-.exclusions-section{
-    min-height: 65vh;
+/* Layout & Sections */
+.exclusions-section {
+    min-height: calc(100vh - 170px);
+    display: flex;
+    align-items: center;
 }
 
-#content{
+#content {
     border-radius: 15px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     position: relative;
+    padding: 2rem;
 }
 
-/* Gradient animation */
-
-@property --angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
+/* Form Elements & Selects */
+.select {
+    background-color: #f2cf5d;
+    color: black;
+    width: 100%;
 }
 
-#content::after, #content::before {
-    content: "";
-    position: absolute;
-    height: calc(100% + 10px);
-    width: calc(100% + 10px);
-    background-image: conic-gradient(from var(--angle), var(--detail-color), var(--detail-color-sec), var(--detail-color-light), var(--detail-color-lighter),var(--detail-color));
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -2;
-    border-radius: 15px;
-    animation: 3s spin linear infinite;
-}
-
-#content::before {
-    filter: blur(1.5rem);
-    opacity: 0.5;
-}
-
-@keyframes spin {
-    from {
-        --angle: 0deg;
-    }
-    to{
-        --angle: 360deg;
-    }
-}
-
-/* Gradient animation */
-
-.select{
-    background-color: var(--detail-color-lighter);
-    color: var(--detail-color);
-    width: 25rem;
-}
-
-.select:hover{
-    background-color: #e6c14a;
+.select:hover {
+    background-color: #a38933;
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
     transform: scale(1.05);
 }
 
-.participants{
-    width: 25rem;
+.participants {
     border-radius: 5px;
     color: var(--detail-color-light);
     background-color: transparent;
     outline: none;
+    width: 100%;
 }
 
 .btn-outline-primary {
     color: var(--detail-color-light);
     border-color: var(--detail-color-light);
-    width: 25rem;
+    width: 100%;
 }
 
 .btn-outline-primary:hover,
@@ -122,7 +85,21 @@ html {
     box-shadow: none !important;
 }
 
-#cont{
+.custom-toggle.active {
+    background-color: var(--detail-color);
+    color: black;
+    border-color: var(--detail-color);
+}
+
+.exclusion-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Main Buttons */
+#cont,
+#goBack {
     background-color: var(--detail-color);
     color: black;
     font-weight: 700;
@@ -134,42 +111,25 @@ html {
     transition: all 0.3s ease;
 }
 
-#cont:hover{
+#cont:hover,
+#goBack:hover {
     background-color: #e6c14a;
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
     transform: scale(1.05);
 }
 
-#goBack{
-    background-color: var(--detail-color);
-    color: black;
-    font-weight: 700;
-    font-size: 1.2rem;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
-    transition: all 0.3s ease;
+/* Modal Styles */
+.modal-dialog {
+    max-width: 500px;
 }
 
-#goBack:hover{
-    background-color: #e6c14a;
-    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
-    transform: scale(1.05);
-}
-
-hr{
-    color: var(--detail-color);
-}
-
-/* MODAL */
-.modal-content{
+.modal-content {
     background-color: var(--detail-color-lighter);
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
     color: rgba(201, 162, 39);
 }
 
-#modalConfirm{
+#modalConfirm {
     background-color: var(--detail-color) !important;
     color: black;
     font-weight: 700;
@@ -181,13 +141,13 @@ hr{
     transition: all 0.3s ease;
 }
 
-#modalConfirm:hover{
+#modalConfirm:hover {
     background-color: #e6c14a !important;
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6) !important;
     transform: scale(1.05);
 }
 
-#close{
+#close {
     color: var(--metalic-grey) !important;
     background-color: var(--dim-gray) !important;
     border-color: var(--dim-gray) !important;
@@ -204,19 +164,101 @@ hr{
     box-shadow: 0 0 0 0.25rem rgba(101, 106, 105, 0.25);
 }
 
-#exclusionWarning{
+#exclusionWarning {
     background-color: var(--light-red);
     color: var(--dark-red);
     border-color: var(--dark-red);
 }
-/* MODAL */
 
-/* Footer and Extras */
+/* Decorations & Footer Extras */
+hr {
+    color: var(--detail-color);
+}
+
+hr.border-secondary {
+    opacity: 0.2;
+}
+
 .hover-gold:hover {
     color: var(--detail-color) !important;
     transition: color 0.2s ease;
 }
 
-hr.border-secondary {
-    opacity: 0.2;
+/* Animations */
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
+}
+
+#content::after,
+#content::before {
+    content: "";
+    position: absolute;
+    height: calc(100% + 10px);
+    width: calc(100% + 10px);
+    background-image: conic-gradient(from var(--angle), var(--detail-color), var(--detail-color-sec), var(--detail-color-light), var(--detail-color-lighter), var(--detail-color));
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -2;
+    border-radius: 15px;
+    animation: 3s spin linear infinite;
+}
+
+#content::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+
+/* Media Queries */
+@media (min-width: 992px) {
+    .exclusion-buttons {
+        flex-direction: row;
+    }
+
+    .exclusion-buttons .btn-outline-primary {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .btn-outline-primary {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 90%;
+        margin: auto;
+    }
+
+    .modal-content {
+        font-size: 0.9rem;
+    }
+
+    .swal2-popup {
+        width: 18rem !important;
+        padding: 1.2rem;
+    }
+
+    .swal2-title {
+        font-size: 1.2rem;
+    }
+
+    .swal2-html-container {
+        font-size: 0.9rem;
+    }
 }
