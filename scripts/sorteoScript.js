@@ -4,7 +4,8 @@
 // DOM: DOM Content
 document.addEventListener('DOMContentLoaded', () => {
 	const people = JSON.parse(localStorage.getItem('people') || '[]');
-	let exclusions = JSON.parse(localStorage.getItem('exclusions') === "No exclusions" ? "{}" : (localStorage.getItem('exclusions') || "{}"));
+	const rawExcl = localStorage.getItem('exclusions');
+	let exclusions = (rawExcl === "No exclusions" || !rawExcl) ? {} : JSON.parse(rawExcl);
 	const eventName = localStorage.getItem('eventName') || 'Sorteo SwapIt';
 
 	document.getElementById('eventTitle').textContent = eventName;
@@ -44,16 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		card.addEventListener('dragstart', function (e) {
 			this.classList.remove('flipped');
 			this.classList.add('dragging');
-
 			const ghost = document.getElementById('drag-ghost');
 			if (e.dataTransfer.setDragImage && ghost) {
 				e.dataTransfer.setDragImage(ghost, 0, 0);
 			}
-
 			e.dataTransfer.setData('text/plain', this.id);
 		});
 		card.addEventListener('dragend', function () { this.classList.remove('dragging'); });
-
 		card.addEventListener('touchstart', handleTouchStart, { passive: false });
 		card.addEventListener('touchmove', handleTouchMove, { passive: false });
 		card.addEventListener('touchend', handleTouchEnd);
@@ -99,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		const touch = e.touches[0];
 		this.style.left = (touch.clientX - touchOffsetX) + 'px';
 		this.style.top = (touch.clientY - touchOffsetY) + 'px';
-
 		const zoneRect = revealZone.getBoundingClientRect();
 		if (touch.clientX > zoneRect.left && touch.clientX < zoneRect.right &&
 			touch.clientY > zoneRect.top && touch.clientY < zoneRect.bottom) {
@@ -114,10 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		this.style.left = 'auto'; this.style.top = 'auto';
 		this.style.zIndex = '5';
 		revealZone.classList.remove('dragover');
-
 		const touch = e.changedTouches[0];
 		const zoneRect = revealZone.getBoundingClientRect();
-
 		if (touch.clientX > zoneRect.left && touch.clientX < zoneRect.right &&
 			touch.clientY > zoneRect.top && touch.clientY < zoneRect.bottom) {
 			dropInZone(this);
@@ -174,4 +169,33 @@ document.addEventListener('DOMContentLoaded', () => {
 			showCancelButton: true, confirmButtonColor: '#C9A227'
 		}).then(res => { if (res.isConfirmed) { localStorage.clear(); window.location.href = 'main.html'; } });
 	};
+
+	document.getElementById('showEventDetails').addEventListener('click', () => {
+		const currentEventName = localStorage.getItem('eventName') || 'Sorteo SwapIt';
+		const organizer = localStorage.getItem('organizerName') || 'No registrado';
+		const eventDate = localStorage.getItem('eventDate') || 'No especificado';
+		const budget = localStorage.getItem('eventPrice') || 'No especificado';
+
+		const participants = JSON.parse(localStorage.getItem('people') || '[]')
+			.map(p => `- ${p.name}`).join('\n') || 'No hay participantes';
+
+		const exclDataRaw = localStorage.getItem('exclusions');
+		const exclusionsData = (exclDataRaw === "No exclusions" || !exclDataRaw) ? {} : JSON.parse(exclDataRaw);
+
+		let exclusionsText = '';
+		if (Object.keys(exclusionsData).length) {
+			exclusionsText = Object.entries(exclusionsData).map(([giver, forbidden]) =>
+				`${giver} ➔ ${forbidden.join(', ') || 'Ninguno'}`
+			).join('\n');
+		} else {
+			exclusionsText = 'No hay exclusiones';
+		}
+
+		const content = `Nombre del organizador: ${organizer}\nNombre del evento: ${currentEventName}\nFecha del evento: ${eventDate}\nPresupuesto: ${budget}\n\nParticipantes:\n${participants}\n\nExclusiones:\n${exclusionsText}`;
+
+		document.getElementById('eventDetailsContent').textContent = content;
+		const modalElement = document.getElementById('eventDetailsModal');
+		const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+		modalInstance.show();
+	});
 });
